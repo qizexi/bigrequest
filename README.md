@@ -7,10 +7,14 @@
 	但是后面还发现我们可以做得更好，就是可以在利用数据库的批量操作原理，就是一条条的写入改为批量写入速度可以大大的提高。
 	
 	一条条数据写入(慢)：
-	INSERT INTO test_reg(r_nick, r_name, r_sex, r_phone, r_addr, r_recflag) VALUES ('qizexi', 'abc', '1', '13607765481', '广东省广州市白云区', MD5('123456'))
+	INSERT INTO test_reg(r_nick, r_name, r_sex, r_phone, r_addr, r_recflag) 
+	VALUES ('qizexi', 'abc', '1', '13607765481', '广东省广州市白云区', MD5('123456'))
 	
 	数据库批量写入(非常快)：
-	INSERT INTO test_reg(r_nick, r_name, r_sex, r_phone, r_addr, r_recflag) VALUES ('qizexi', 'abc', '1', '13607765481', '广东省广州市白云区', MD5('123456')),('qizexi2', 'abc', '1', '13607765481', '广东省广州市白云区', MD5('123456')),('qizexi3', 'abc', '1', '13607765481', '广东省广州市白云区', MD5('123456')),......
+	INSERT INTO test_reg(r_nick, r_name, r_sex, r_phone, r_addr, r_recflag) VALUES
+	('qizexi', 'abc', '1', '13607765481', '广东省广州市白云区', MD5('123456')),
+	('qizexi2', 'abc', '1', '13607765481', '广东省广州市白云区', MD5('123456')),
+	('qizexi3', 'abc', '1', '13607765481', '广东省广州市白云区', MD5('123456')),......
 	
 	但是我们知道客户端是一个个发来请求的，怎么样既要快速的响应每一个客户端的请求，又可以达到批量处理的目的呢？
 	这就要求服务器端要把这些请求存储起来先不处理等请求数量达到一定数量之后或者请求处理的定时器超时再把现有的请求处理，
